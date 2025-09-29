@@ -17,10 +17,10 @@ public class PhysicsTest : MonoBehaviour
 
         Physics.Quaternion rotation = new Physics.Quaternion(1, 0, 0, 0);
 
-        if (Input.GetKey(KeyCode.A)) rotation.Rotate(Vector3.up, 0.1);
-        if (Input.GetKey(KeyCode.D)) rotation.Rotate(Vector3.up, -0.1);
-        if (Input.GetKey(KeyCode.W)) rotation.Rotate(Vector3.right, 0.1);
-        if (Input.GetKey(KeyCode.S)) rotation.Rotate(Vector3.right, -0.1);
+        if (Input.GetKey(KeyCode.A)) rotation.Rotate(Physics.Vector3.up, 0.1);
+        if (Input.GetKey(KeyCode.D)) rotation.Rotate(Physics.Vector3.up, -0.1);
+        if (Input.GetKey(KeyCode.W)) rotation.Rotate(Physics.Vector3.right, 0.1);
+        if (Input.GetKey(KeyCode.S)) rotation.Rotate(Physics.Vector3.right, -0.1);
 
         q.Rotate(rotation);
         this.transform.rotation = q.ToUnity();

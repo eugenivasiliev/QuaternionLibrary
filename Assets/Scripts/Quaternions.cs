@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Physics
@@ -55,8 +56,11 @@ namespace Physics
                 q1.a * q2.d + q1.d * q2.a + q1.b * q2.c - q1.c * q2.b  //k
             );
 
-        static public Quaternion operator *(double d, Quaternion q) => new Quaternion(d * q.a, d * q.b, d * q.c, d * q.d);
-        static public Quaternion operator /(Quaternion q, double d) => (1.0f / d) * q;
+        public static Quaternion operator *(double d, Quaternion q) => new Quaternion(d * q.a, d * q.b, d * q.c, d * q.d);
+        public static Quaternion operator /(Quaternion q, double d) => (1.0f / d) * q;
+
+        public double Scalar() => this.a;
+        public Vector3 Vector() => new Vector3(this.b, this.c, this.d);
 
         public Quaternion conjugated { get { return new Quaternion(this.a, -this.b, -this.c, -this.d); } }
         public void Conjugate() => this = this.conjugated;
@@ -81,6 +85,9 @@ namespace Physics
         {
             this.Rotate(new Quaternion(axis, angle));
         }
+
+        public static double Dot(Quaternion q1, Quaternion q2) => q1.a * q2.a + q1.b * q2.b + q1.c * q2.c + q1.d * q2.d;
+        public double Dot(Quaternion q) => this.a * q.a + this.b * q.b + this.c * q.c + this.d * q.d;
 
         public Vector3 eulerAngles
         {
@@ -108,5 +115,11 @@ namespace Physics
         }
 
         public UnityEngine.Quaternion ToUnity() => new UnityEngine.Quaternion((float)this.a, (float)this.b, (float)this.c, (float)this.d);
+
+        public static double Angle(Quaternion a, Quaternion b)
+        {
+            double dot = Quaternion.Dot(a, b);
+            return System.Math.Atan2(dot, a.magnitude * b.magnitude);
+        }
     }
 }
