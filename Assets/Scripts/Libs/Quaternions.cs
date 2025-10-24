@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Physics
+namespace Math
 {
     public struct Quaternion
     {
@@ -15,8 +15,15 @@ namespace Physics
             this.d = d;
         }
 
-        public Quaternion(double roll, double pitch, double yaw)
+        public Quaternion(double roll, double pitch, double yaw, bool isInDegrees = false)
         {
+            if(isInDegrees)
+            {
+                roll = roll * Constants.Deg2Rad;
+                pitch = pitch * Constants.Deg2Rad;
+                yaw = yaw * Constants.Deg2Rad;
+            }
+
             double cr = System.Math.Cos(roll * 0.5);
             double sr = System.Math.Sin(roll * 0.5);
             double cp = System.Math.Cos(pitch * 0.5);
@@ -121,5 +128,7 @@ namespace Physics
             double dot = Quaternion.Dot(a, b);
             return System.Math.Atan2(dot, a.magnitude * b.magnitude);
         }
+
+        public static Quaternion identity = new Quaternion(1, 0, 0, 0);
     }
 }

@@ -1,7 +1,4 @@
-
-using Unity.VisualScripting;
-
-namespace Physics
+namespace Math
 {
     public struct Vector2
     {
@@ -104,6 +101,8 @@ namespace Physics
         public double Angle(Vector3 v) => Vector3.Angle(this, v);
         public static Vector3 Project(Vector3 v1, Vector3 v2) => ((v1 * v2) / v2.sqrMagnitude) * v2;
         public Vector3 Project(Vector3 v) => ((this * v) / v.sqrMagnitude) * v;
+
+        public static implicit operator UnityEngine.Vector3(Vector3 v) => new UnityEngine.Vector3((float)v.x, (float)v.y, (float)v.z);
 
         #region CONSTS
         public static Vector3 zero

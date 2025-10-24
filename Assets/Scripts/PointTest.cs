@@ -5,7 +5,7 @@ using UnityEngine;
 public class PointTest : MonoBehaviour
 {
     [NonSerialized] public float speed = 5.0f;
-    [NonSerialized] public Physics.Quaternion q = new Physics.Quaternion(1, 0, 0, 0);
+    [NonSerialized] public Math.Quaternion q = new Math.Quaternion(1, 0, 0, 0);
 
     void Start()
     {
