@@ -49,5 +49,52 @@ namespace Math
                 0, 0, 1, translation.z,
                 0, 0, 0, 1
                 );
+
+        public static Matrix4x4 CreateRotationX(double angle) =>
+            new Matrix4x4(
+                1, 0, 0, 0,
+                0, Math.Cos(angle), -Math.Sin(angle), 0,
+                0, Math.Sin(angle), Math.Cos(angle), 0,
+                0, 0, 0, 1
+                );
+
+        public static Matrix4x4 CreateRotationY(double angle) =>
+            new Matrix4x4(
+                Math.Cos(angle), 0, -Math.Sin(angle), 0,
+                0, 1, 0, 0,
+                Math.Sin(angle), 0, Math.Cos(angle), 0,
+                0, 0, 0, 1
+                );
+
+        public static Matrix4x4 CreateRotationZ(double angle) =>
+            new Matrix4x4(
+                Math.Cos(angle), -Math.Sin(angle), 0, 0,
+                Math.Sin(angle), Math.Cos(angle), 0, 0,
+                0, 0, 1, 0,
+                0, 0, 0, 1
+                );
+
+        public static Matrix4x4 CreateRotation(double a, Vector3 axis)
+        {
+            Vector3 u = axis.normalized;
+            double c = Math.Cos(a);
+            double c_1 = 1 - c;
+            double s = Math.Sin(a);
+            return new Matrix4x4(
+                u.x * u.x * c_1 + c, u.x * u.y * c_1 - u.z * s, u.x * u.z * c_1 + u.y * s, 0,
+                u.x * u.y * c_1 + u.z * s, u.y * u.y * c_1 + c, u.y * u.z * c_1 - u.x * s, 0,
+                u.x * u.z * c_1 - u.y * s, u.y * u.z * c_1 + u.x * s, u.z * u.z * c_1 + c, 0,
+                0, 0, 0, 1
+                );
+        }
+
+        public static HomogenousVector3 operator *(Matrix4x4 m, HomogenousVector3 hv) =>
+            new HomogenousVector3(
+                m.M11 * hv.x + m.M12 * hv.y + m.M13 * hv.z + m.M14 * hv.w,
+                m.M21 * hv.x + m.M22 * hv.y + m.M23 * hv.z + m.M24 * hv.w,
+                m.M31 * hv.x + m.M32 * hv.y + m.M33 * hv.z + m.M34 * hv.w,
+                m.M41 * hv.x + m.M42 * hv.y + m.M43 * hv.z + m.M44 * hv.w
+                );
+        public static Vector3 operator *(Matrix4x4 m, Vector3 v) => (Vector3)(m * (HomogenousVector3)v);
     }
 }

@@ -29,7 +29,7 @@ namespace Math
         private double Value
         {
             get => value;
-            set => this.value = Functions.Clamp(value, min, max);
+            set => this.value = Math.Clamp(value, min, max);
         }
 
         public static implicit operator double(ClampedDouble cD) => cD.Value;

@@ -37,8 +37,9 @@ namespace Math
             this.d = cr * cp * sy - sr * sp * cy;
         }
 
-        public Quaternion(Vector3 axis, double angle)
+        public Quaternion(Vector3 axis, double angle, bool isInDegrees = false)
         {
+            if(isInDegrees) angle = angle * Constants.Deg2Rad;
             double angle_2 = angle * 0.5f;
             Vector3 n_axis = axis.normalized;
             double s = System.Math.Sin(angle_2);
@@ -65,6 +66,12 @@ namespace Math
 
         public static Quaternion operator *(double d, Quaternion q) => new Quaternion(d * q.a, d * q.b, d * q.c, d * q.d);
         public static Quaternion operator /(Quaternion q, double d) => (1.0f / d) * q;
+
+        public static implicit operator UnityEngine.Quaternion(Quaternion q) => 
+            new UnityEngine.Quaternion((float)q.a, (float)q.b, (float)q.c, (float)q.d);
+        
+        public static implicit operator Quaternion(UnityEngine.Quaternion q) =>
+            new Quaternion(q.x, q.y, q.z, q.w);
 
         public double Scalar() => this.a;
         public Vector3 Vector() => new Vector3(this.b, this.c, this.d);

@@ -1,7 +1,10 @@
 namespace Math
 {
-    public static class Functions
+    public static class Math
     {
+        public static double Sin(double a) => System.Math.Sin(a);
+        public static double Cos(double a) => System.Math.Cos(a);
+
         public static double Min(double a, double b) => (a < b) ? a : b;
         public static double Max(double a, double b) => (a > b) ? a : b;
         public static double Clamp(double val, double min, double max) => Min(Max(val, min), max);
