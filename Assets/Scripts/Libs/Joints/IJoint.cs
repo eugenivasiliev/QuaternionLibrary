@@ -15,14 +15,12 @@ public interface IJoint<T>
     public void Setup()
     {
         t = new ClampedDouble(0, MinRange, MaxRange);
-        UnityEngine.InputSystem.InputSystem.actions.FindAction(PositiveMotionKeyId, true).performed += PositiveMotionAction;
-        UnityEngine.InputSystem.InputSystem.actions.FindAction(NegativeMotionKeyId, true).performed += NegativeMotionAction;
     }
 
     public T GetLocalTransformation();
 
-    protected void PositiveMotionAction(UnityEngine.InputSystem.InputAction.CallbackContext ctx) =>
+    public void PositiveMotionAction(/*UnityEngine.InputSystem.InputAction.CallbackContext ctx*/) =>
         t += Delta;
-    protected void NegativeMotionAction(UnityEngine.InputSystem.InputAction.CallbackContext ctx) =>
+    public void NegativeMotionAction(/*UnityEngine.InputSystem.InputAction.CallbackContext ctx*/) =>
         t -= Delta;
 }
