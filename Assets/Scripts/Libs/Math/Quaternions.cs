@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Math
 {
-    public struct Quaternion
+    public class Quaternion : Transformation
     {
         public double a, b, c, d; //real, i, j, k
 
@@ -77,7 +77,7 @@ namespace Math
         public Vector3 Vector() => new Vector3(this.b, this.c, this.d);
 
         public Quaternion conjugated { get { return new Quaternion(this.a, -this.b, -this.c, -this.d); } }
-        public void Conjugate() => this = this.conjugated;
+        public void Conjugate() { b = -b; c = -c; d = -d; }
 
         public double sqrMagnitude { get { return this.a * this.a + this.b * this.b + this.c * this.c + this.d * this.d; } }
         public double SqrMagnitude() => this.sqrMagnitude;
@@ -86,19 +86,19 @@ namespace Math
         public double Magnitude() => this.magnitude;
 
         public Quaternion normalized { get { return this / this.magnitude; } }
-        public void Normalize() => this = this.normalized;
+        public void Normalize() { a /= this.magnitude; b /= this.magnitude; c /= this.magnitude; d /= this.magnitude; }
 
         public Quaternion inverse { get { return this.conjugated / this.sqrMagnitude; } }
-        public void Invert() => this = this.inverse;
+        public void Invert() { a /= sqrMagnitude; b /= -sqrMagnitude; c /= -sqrMagnitude; d /= -sqrMagnitude; }
 
-        public void Rotate(Quaternion rotation)
-        {
-            this = this * rotation;
-        }
-        public void Rotate(Vector3 axis, double angle)
-        {
-            this.Rotate(new Quaternion(axis, angle));
-        }
+        //public void Rotate(Quaternion rotation) { }
+        ////{
+        ////    this = this * rotation;
+        ////}
+        //public void Rotate(Vector3 axis, double angle)
+        //{
+        //    this.Rotate(new Quaternion(axis, angle));
+        //}
 
         public static double Dot(Quaternion q1, Quaternion q2) => q1.a * q2.a + q1.b * q2.b + q1.c * q2.c + q1.d * q2.d;
         public double Dot(Quaternion q) => this.a * q.a + this.b * q.b + this.c * q.c + this.d * q.d;

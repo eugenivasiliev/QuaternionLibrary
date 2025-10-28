@@ -1,8 +1,9 @@
+using JetBrains.Annotations;
 using System.Numerics;
 
 namespace Math
 {
-    public class Matrix4x4
+    public class Matrix4x4 : Transformation
     {
         public double M11;
         public double M12;

@@ -1,13 +1,14 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class MyRobotController : MonoBehaviour
 {
+    private List<IJoint<Transformation>> myJoints;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        //Poner cosas por tag
     }
 
     // Update is called once per frame

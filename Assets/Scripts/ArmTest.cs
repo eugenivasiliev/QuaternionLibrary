@@ -11,36 +11,36 @@ public class ArmTest : MonoBehaviour
 
     void Start()
     {
-        foreach (var point in points)
-        {
-            point.transform.rotation = point.q.ToUnity();
-        }
+        //foreach (var point in points)
+        //{
+        //    point.transform.rotation = point.q.ToUnity();
+        //}
     }
 
     void Update()
     {
-        Math.Quaternion rotation = new Math.Quaternion(1, 0, 0, 0);
+        //Math.Quaternion rotation = new Math.Quaternion(1, 0, 0, 0);
 
-        if (Input.GetKey(KeyCode.A)) rotation.Rotate(Math.Vector3.up, Time.deltaTime * points[indexControlling].speed);
-        if (Input.GetKey(KeyCode.D)) rotation.Rotate(Math.Vector3.up, -Time.deltaTime * points[indexControlling].speed);
-        if (Input.GetKey(KeyCode.W)) rotation.Rotate(Math.Vector3.right, Time.deltaTime * points[indexControlling].speed);
-        if (Input.GetKey(KeyCode.S)) rotation.Rotate(Math.Vector3.right, -Time.deltaTime * points[indexControlling].speed);
+        //if (Input.GetKey(KeyCode.A)) rotation.Rotate(Math.Vector3.up, Time.deltaTime * points[indexControlling].speed);
+        //if (Input.GetKey(KeyCode.D)) rotation.Rotate(Math.Vector3.up, -Time.deltaTime * points[indexControlling].speed);
+        //if (Input.GetKey(KeyCode.W)) rotation.Rotate(Math.Vector3.right, Time.deltaTime * points[indexControlling].speed);
+        //if (Input.GetKey(KeyCode.S)) rotation.Rotate(Math.Vector3.right, -Time.deltaTime * points[indexControlling].speed);
 
-        points[indexControlling].q.Rotate(rotation);
-        points[indexControlling].transform.rotation = points[indexControlling].q.ToUnity();
+        //points[indexControlling].q.Rotate(rotation);
+        //points[indexControlling].transform.rotation = points[indexControlling].q.ToUnity();
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            passToNext = true;
-        }
+        //if (Input.GetKeyDown(KeyCode.Space))
+        //{
+        //    passToNext = true;
+        //}
 
-        if (passToNext)
-        {
-            if (indexControlling == points.Length - 1)
-                indexControlling = 0;
-            else
-                indexControlling++;
-            passToNext = false;
-        }
+        //if (passToNext)
+        //{
+        //    if (indexControlling == points.Length - 1)
+        //        indexControlling = 0;
+        //    else
+        //        indexControlling++;
+        //    passToNext = false;
+        //}
     }
 }
