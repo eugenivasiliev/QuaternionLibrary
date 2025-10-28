@@ -8,20 +8,24 @@ namespace Geometry
         public Transform parent;
         public System.Collections.Generic.List<Transform> children;
 
-        public Vector3 position = Vector3.zero;
-        public Quaternion localRotation = Quaternion.identity;
-        public Quaternion rotation { 
-            get 
-            { 
-                if(parent != null) return parent.localRotation * localRotation;
-                return localRotation;
-            } 
-            set 
+        private Vector3 localPosition = Vector3.zero;
+        public Vector3 position
+        {
+            get => (parent != null) ? parent.position + localPosition : localPosition;
+            set
             {
-                foreach (Transform t in children)
-                    t.rotation = value * (localRotation.inverse * t.rotation);
-                localRotation = value;
-            } 
+                if (parent != null) localPosition = -parent.position + value;
+                else localPosition = value;
+            }
+        }
+        public Quaternion localRotation = Quaternion.identity;
+        public Quaternion rotation {
+            get => (parent != null) ? parent.rotation * localRotation : localRotation;
+            set
+            {
+                if (parent != null) localRotation = parent.rotation.inverse * value;
+                else localRotation = value;
+            }
         }
         public Vector3 eulerAngles
         {
