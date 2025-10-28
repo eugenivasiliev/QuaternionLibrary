@@ -1,6 +1,3 @@
-using System;
-using UnityEngine;
-
 namespace Math
 {
     public class Quaternion : Transformation
@@ -17,7 +14,7 @@ namespace Math
 
         public Quaternion(double roll, double pitch, double yaw, bool isInDegrees = false)
         {
-            if(isInDegrees)
+            if (isInDegrees)
             {
                 roll = roll * Constants.Deg2Rad;
                 pitch = pitch * Constants.Deg2Rad;
@@ -39,7 +36,12 @@ namespace Math
 
         public Quaternion(Vector3 axis, double angle, bool isInDegrees = false)
         {
-            if(isInDegrees) angle = angle * Constants.Deg2Rad;
+            if (angle == 0)
+            {
+                this.a = 1; this.b = 0; this.c = 0; this.d = 0;
+                return;
+            }
+            if (isInDegrees) angle = angle * Constants.Deg2Rad;
             double angle_2 = angle * 0.5f;
             Vector3 n_axis = axis.normalized;
             double s = System.Math.Sin(angle_2);
@@ -56,7 +58,7 @@ namespace Math
 
         static public Quaternion operator -(Quaternion q1, Quaternion q2) => q1 + -q2;
 
-        static public Quaternion operator *(Quaternion q1, Quaternion q2) => 
+        static public Quaternion operator *(Quaternion q1, Quaternion q2) =>
             new Quaternion(
                 q1.a * q2.a - q1.b * q2.b - q1.c * q2.c - q1.d * q2.d, //real
                 q1.a * q2.b + q1.b * q2.a + q1.c * q2.d - q1.d * q2.c, //i
@@ -67,9 +69,9 @@ namespace Math
         public static Quaternion operator *(double d, Quaternion q) => new Quaternion(d * q.a, d * q.b, d * q.c, d * q.d);
         public static Quaternion operator /(Quaternion q, double d) => (1.0f / d) * q;
 
-        public static implicit operator UnityEngine.Quaternion(Quaternion q) => 
-            new UnityEngine.Quaternion((float)q.a, (float)q.b, (float)q.c, (float)q.d);
-        
+        public static implicit operator UnityEngine.Quaternion(Quaternion q) =>
+            new UnityEngine.Quaternion((float)q.d, (float)q.a, (float)q.b, (float)q.c);
+
         public static implicit operator Quaternion(UnityEngine.Quaternion q) =>
             new Quaternion(q.x, q.y, q.z, q.w);
 
