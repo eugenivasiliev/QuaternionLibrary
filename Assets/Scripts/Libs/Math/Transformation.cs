@@ -1,6 +1,7 @@
-using UnityEngine;
 
-public class Transformation
-{
-    
+namespace Math {
+    /// <summary>
+    /// Base class for all spatial transformations.
+    /// </summary>
+    public abstract class Transformation {}
 }

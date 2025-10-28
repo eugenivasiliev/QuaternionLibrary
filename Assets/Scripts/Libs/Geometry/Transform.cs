@@ -1,8 +1,14 @@
 using Math;
-using Unity.VisualScripting;
 
 namespace Geometry
 {
+    /// <summary>
+    /// Custom <c>Transform</c> class.
+    /// </summary>
+    /// <remarks>Derives from <see cref="UnityEngine.MonoBehaviour"/>,
+    /// to allow to add it as component script and synchronise with <see cref="UnityEngine.Transform"/> 
+    /// on <see cref="Start"/> and <see cref="Update"/>
+    /// </remarks>
     public class Transform : UnityEngine.MonoBehaviour
     {
         public Transform parent;
@@ -69,6 +75,7 @@ namespace Geometry
         public static implicit operator Transform(UnityEngine.Transform transform) =>
             new Transform(transform.position, transform.rotation, transform.lossyScale);
 
+        /// <remarks>Synchronises with <see cref="UnityEngine.Transform"/></remarks>
         private void Start()
         {
             this.position = this.transform.position;
@@ -76,6 +83,7 @@ namespace Geometry
             this.scale = this.transform.lossyScale;
         }
 
+        /// <remarks>Synchronises with <see cref="UnityEngine.Transform"/></remarks>
         private void Update()
         {
             this.transform.position = this.position;
