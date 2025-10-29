@@ -3,6 +3,7 @@ using System.Numerics;
 
 namespace Math
 {
+    [System.Serializable]
     public class Matrix4x4 : Transformation
     {
         public double M11;

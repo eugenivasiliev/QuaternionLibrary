@@ -1,5 +1,6 @@
 using Math;
 
+
 public interface IJoint<T>
 {
     public string PositiveMotionKeyId { get; }
@@ -19,8 +20,8 @@ public interface IJoint<T>
 
     public T GetLocalTransformation();
 
-    public void PositiveMotionAction(/*UnityEngine.InputSystem.InputAction.CallbackContext ctx*/) =>
-        t += Delta;
-    public void NegativeMotionAction(/*UnityEngine.InputSystem.InputAction.CallbackContext ctx*/) =>
-        t -= Delta;
+    public void PositiveMotionAction() => t += Delta;
+    public void NegativeMotionAction() => t -= Delta;
+
+    public void JointUpdate() { }
 }

@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace Math
 {
+    [System.Serializable]
     public class Quaternion : Transformation
     {
         public double a, b, c, d; //real, i, j, k
@@ -90,15 +91,6 @@ namespace Math
 
         public Quaternion inverse { get { return this.conjugated / this.sqrMagnitude; } }
         public void Invert() { a /= sqrMagnitude; b /= -sqrMagnitude; c /= -sqrMagnitude; d /= -sqrMagnitude; }
-
-        //public void Rotate(Quaternion rotation) { }
-        ////{
-        ////    this = this * rotation;
-        ////}
-        //public void Rotate(Vector3 axis, double angle)
-        //{
-        //    this.Rotate(new Quaternion(axis, angle));
-        //}
 
         public static double Dot(Quaternion q1, Quaternion q2) => q1.a * q2.a + q1.b * q2.b + q1.c * q2.c + q1.d * q2.d;
         public double Dot(Quaternion q) => this.a * q.a + this.b * q.b + this.c * q.c + this.d * q.d;
