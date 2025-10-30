@@ -41,7 +41,7 @@ public class RotatoryJoint : UnityEngine.MonoBehaviour, IJoint<Quaternion>
         startRotation = myTransform.rotation;
     }
 
-    private void Update()
+    public void JointUpdate()
     {
         myTransform.rotation = (this as IJoint<Quaternion>).GetLocalTransformation() * startRotation;
 
