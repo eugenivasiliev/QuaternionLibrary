@@ -1,20 +1,23 @@
 using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.InputSystem;
 using Math;
 
-public class MyRobotController : MonoBehaviour
+public class MyRobotController : UnityEngine.MonoBehaviour
 {
-    private List<IJoint<Transformation>> myJoints;
+    [UnityEngine.SerializeField] private List<UnityEngine.GameObject> myJoints;
 
     void Start()
     {
-        //Poner cosas por tag
+
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        for (int i = 0; i < myJoints.Count; i++)
+        {
+            if (myJoints[i] == null)
+            {
+                myJoints[i].GetComponent<IJoint<Math.Quaternion>>().JointUpdate();
+            }
+        }
     }
 }

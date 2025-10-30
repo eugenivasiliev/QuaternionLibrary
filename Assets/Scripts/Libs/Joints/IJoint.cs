@@ -28,4 +28,6 @@ public interface IJoint<T> where T : Transformation
         t += Delta;
     public void NegativeMotionAction() =>
         t -= Delta;
+
+    public void JointUpdate();
 }

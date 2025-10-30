@@ -482,15 +482,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parent: {fileID: 1598800553}
   children: []
-  position:
-    x: 0
-    y: 0
-    z: 0
-  localRotation:
-    a: 1
-    b: 0
-    c: 0
-    d: 0
   scale:
     x: 0
     y: 0
@@ -771,6 +762,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c983c7c934512e940b28ce9442978c3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myJoints:
+  - {fileID: 1598800549}
 --- !u!4 &1476498742
 Transform:
   m_ObjectHideFlags: 0
@@ -929,11 +922,6 @@ MonoBehaviour:
     x: 0
     y: 1
     z: 0
-  startRotation:
-    a: 0
-    b: 0
-    c: 0
-    d: 0
   myTransform: {fileID: 1598800553}
 --- !u!114 &1598800553
 MonoBehaviour:
@@ -950,15 +938,6 @@ MonoBehaviour:
   parent: {fileID: 0}
   children:
   - {fileID: 821967973}
-  position:
-    x: 0
-    y: 0
-    z: 0
-  localRotation:
-    a: 1
-    b: 0
-    c: 0
-    d: 0
   scale:
     x: 0
     y: 0
