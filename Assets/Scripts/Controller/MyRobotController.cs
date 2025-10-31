@@ -1,19 +1,39 @@
 using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.InputSystem;
+using Math;
 
-public class MyRobotController : MonoBehaviour
+public class MyRobotController : UnityEngine.MonoBehaviour
 {
-    private List<IJoint<Transformation>> myJoints;
+    [UnityEngine.SerializeField] private List<UnityEngine.GameObject> joints;
+    [UnityEngine.SerializeField] private int activeJoint = 0;
 
-    void Start()
+    private IJoint<Matrix4x4> transJoint;
+    private IJoint<Quaternion> rotJoint;
+
+    private void Start()
     {
-        //Poner cosas por tag
+        UnityEngine.InputSystem.InputSystem.actions.FindAction("Joint Change").performed += ctx => ChangeJoint();
+        ChangeJoint();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        if (transJoint != null && UnityEngine.Input.GetKey(transJoint.PositiveMotionKeyId)) transJoint.PositiveMotionAction();
+        if(transJoint != null && UnityEngine.Input.GetKey(transJoint.NegativeMotionKeyId)) transJoint.NegativeMotionAction();
+
+        if(rotJoint != null && UnityEngine.Input.GetKey(rotJoint.PositiveMotionKeyId)) rotJoint.PositiveMotionAction();
+        if(rotJoint != null && UnityEngine.Input.GetKey(rotJoint.NegativeMotionKeyId)) rotJoint.NegativeMotionAction();
+    }
+
+    private void ChangeJoint()
+    {
+        activeJoint++;
+        activeJoint %= joints.Count;
+
+        transJoint = null; rotJoint = null;
+
+        if (joints[activeJoint].TryGetComponent(out transJoint)) return;
+        if (joints[activeJoint].TryGetComponent(out rotJoint)) return;
+
+        throw new System.Exception("Invalid joint");
     }
 }
