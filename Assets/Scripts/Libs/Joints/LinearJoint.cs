@@ -35,14 +35,11 @@ public class LinearJoint : UnityEngine.MonoBehaviour, IJoint<Matrix4x4>
     {
         (this as IJoint<Matrix4x4>).Setup();
         UnityEngine.InputSystem.InputSystem.actions.Enable();
-        startPos = this.transform.position;
+        startPos = this.GetComponent<Geometry.Transform>().position;
     }
 
-    public void JointUpdate()
+    public void Update()
     {
-        this.transform.position = (this as IJoint<Matrix4x4>).GetLocalTransformation() * startPos;
-
-        if (UnityEngine.Input.GetKey(PositiveMotionKeyId)) (this as IJoint<Matrix4x4>).PositiveMotionAction();
-        if (UnityEngine.Input.GetKey(NegativeMotionKeyId)) (this as IJoint<Matrix4x4>).NegativeMotionAction();
+        this.GetComponent<Geometry.Transform>().position = (this as IJoint<Matrix4x4>).GetLocalTransformation() * startPos;
     }
 }

@@ -463,7 +463,6 @@ GameObject:
   - component: {fileID: 821967976}
   - component: {fileID: 821967975}
   - component: {fileID: 821967977}
-  - component: {fileID: 821967978}
   m_Layer: 0
   m_Name: GameObject (1)
   m_TagString: Untagged
@@ -485,6 +484,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parent: {fileID: 1598800553}
   children: []
+  localPosition:
+    x: 0
+    y: 0
+    z: 0
   scale:
     x: 0
     y: 0
@@ -598,28 +601,6 @@ MonoBehaviour:
     x: 0
     y: 0
     z: 0
---- !u!114 &821967978
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 821967972}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 525935f722c2e5e438bbb26b13c5e2f3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  positiveMotionKeyId: 
-  negativeMotionKeyId: 
-  minRange: 0
-  maxRange: 0
-  delta: 0
-  direction:
-    x: 0
-    y: 1
-    z: 0
-  myTransform: {fileID: 821967973}
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -729,9 +710,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c983c7c934512e940b28ce9442978c3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myJoints:
+  joints:
   - {fileID: 1598800549}
   - {fileID: 821967972}
+  activeJoint: 0
 --- !u!4 &1476498742
 Transform:
   m_ObjectHideFlags: 0
@@ -756,7 +738,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1598800551}
-  - component: {fileID: 1598800550}
   - component: {fileID: 1598800552}
   - component: {fileID: 1598800553}
   - component: {fileID: 1598800555}
@@ -768,31 +749,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1598800550
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1598800549}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd87a75c5dbe31d4390fe608a3b00ff9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  positiveMotionKeyId: 1
-  negativeMotionKeyId: 2
-  minRange: 0
-  maxRange: 1
-  delta: 0.1
-  direction:
-    x: 0
-    y: 1
-    z: 0
-  startPos:
-    x: 0
-    y: 0
-    z: 0
 --- !u!4 &1598800551
 Transform:
   m_ObjectHideFlags: 0
@@ -845,6 +801,10 @@ MonoBehaviour:
   parent: {fileID: 0}
   children:
   - {fileID: 821967973}
+  localPosition:
+    x: 0
+    y: 0
+    z: 0
   scale:
     x: 0
     y: 0

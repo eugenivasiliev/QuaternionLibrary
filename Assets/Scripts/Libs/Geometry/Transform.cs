@@ -1,3 +1,4 @@
+using System.Drawing;
 using Math;
 
 namespace Geometry
@@ -14,13 +15,27 @@ namespace Geometry
         public Transform parent;
         public System.Collections.Generic.List<Transform> children;
 
+        [UnityEngine.SerializeField]
         private Vector3 localPosition = Vector3.zero;
         public Vector3 position
         {
-            get => (parent != null) ? parent.position + localPosition : localPosition;
+            get 
+            {
+                if (parent != null) {
+                    return parent.rotation * localPosition + parent.position;
+                }
+                else {
+                    return localPosition;
+                }
+            }
             set
             {
-                if (parent != null) localPosition = -parent.position + value;
+                if (parent != null)
+                {
+                    Vector3 point = value;
+                    point = localRotation.inverse * point;
+                    localPosition = -parent.position + point;
+                }
                 else localPosition = value;
             }
         }
@@ -89,6 +104,5 @@ namespace Geometry
             this.transform.position = this.position;
             this.transform.rotation = this.rotation;
         }
-
     }
 }
