@@ -1,7 +1,11 @@
 using Math;
 
-
-public interface IJoint<T>
+/// <summary>
+/// General interface for controllable joints in the robot.
+/// Uses input to produce a <see cref="Transformation"/> bounded by a range.
+/// </summary>
+/// <typeparam name="T"></typeparam>
+public interface IJoint<T> where T : Transformation
 {
     public string PositiveMotionKeyId { get; }
     public string NegativeMotionKeyId { get; }
@@ -20,8 +24,10 @@ public interface IJoint<T>
 
     public T GetLocalTransformation();
 
-    public void PositiveMotionAction() => t += Delta;
-    public void NegativeMotionAction() => t -= Delta;
+    public void PositiveMotionAction() =>
+        t += Delta;
+    public void NegativeMotionAction() =>
+        t -= Delta;
 
-    public void JointUpdate() { }
+    public void JointUpdate();
 }

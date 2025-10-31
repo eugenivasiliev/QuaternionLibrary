@@ -1,12 +1,28 @@
-using System;
-using UnityEngine;
-
 namespace Math
 {
-    [System.Serializable]
+    /// <summary>Custom <c>Quaternion</c> class. Used to represent rotations.</summary>
+    /// <remarks>Inherits from <c>Transformation</c></remarks>
     public class Quaternion : Transformation
     {
-        public double a, b, c, d; //real, i, j, k
+        /// <summary>
+        /// Real component of the <c>Quaternion</c>
+        /// </summary>
+        public double a;
+
+        /// <summary>
+        /// <b>x</b>-axis component of the <c>Quaternion</c>
+        /// </summary>
+        public double b;
+
+        /// <summary>
+        /// <b>y</b>-axis component of the <c>Quaternion</c>
+        /// </summary>
+        public double c;
+
+        /// <summary>
+        /// <b>z</b>-axis component of the <c>Quaternion</c>
+        /// </summary>
+        public double d;
 
         public Quaternion(double a, double b, double c, double d)
         {
@@ -18,7 +34,7 @@ namespace Math
 
         public Quaternion(double roll, double pitch, double yaw, bool isInDegrees = false)
         {
-            if(isInDegrees)
+            if (isInDegrees)
             {
                 roll = roll * Constants.Deg2Rad;
                 pitch = pitch * Constants.Deg2Rad;
@@ -40,9 +56,14 @@ namespace Math
 
         public Quaternion(Vector3 axis, double angle, bool isInDegrees = false)
         {
-            if(isInDegrees) angle = angle * Constants.Deg2Rad;
+            if (angle == 0)
+            {
+                this.a = 1; this.b = 0; this.c = 0; this.d = 0;
+                return;
+            }
+            if (isInDegrees) angle = angle * Constants.Deg2Rad;
             double angle_2 = angle * 0.5f;
-            Vector3 n_axis = axis.normalized;
+            Vector3 n_axis = axis.Normalized;
             double s = System.Math.Sin(angle_2);
 
             this.a = System.Math.Cos(angle_2);
@@ -57,7 +78,7 @@ namespace Math
 
         static public Quaternion operator -(Quaternion q1, Quaternion q2) => q1 + -q2;
 
-        static public Quaternion operator *(Quaternion q1, Quaternion q2) => 
+        static public Quaternion operator *(Quaternion q1, Quaternion q2) =>
             new Quaternion(
                 q1.a * q2.a - q1.b * q2.b - q1.c * q2.c - q1.d * q2.d, //real
                 q1.a * q2.b + q1.b * q2.a + q1.c * q2.d - q1.d * q2.c, //i
@@ -68,14 +89,14 @@ namespace Math
         public static Quaternion operator *(double d, Quaternion q) => new Quaternion(d * q.a, d * q.b, d * q.c, d * q.d);
         public static Quaternion operator /(Quaternion q, double d) => (1.0f / d) * q;
 
-        public static implicit operator UnityEngine.Quaternion(Quaternion q) => 
-            new UnityEngine.Quaternion((float)q.a, (float)q.b, (float)q.c, (float)q.d);
-        
+        public static implicit operator UnityEngine.Quaternion(Quaternion q) =>
+            new UnityEngine.Quaternion((float)q.d, (float)q.a, (float)q.b, (float)q.c);
+
         public static implicit operator Quaternion(UnityEngine.Quaternion q) =>
             new Quaternion(q.x, q.y, q.z, q.w);
 
-        public double Scalar() => this.a;
-        public Vector3 Vector() => new Vector3(this.b, this.c, this.d);
+        public double RealComponent() => this.a;
+        public Vector3 ImaginaryComponent() => new Vector3(this.b, this.c, this.d);
 
         public Quaternion conjugated { get { return new Quaternion(this.a, -this.b, -this.c, -this.d); } }
         public void Conjugate() { b = -b; c = -c; d = -d; }
@@ -119,8 +140,6 @@ namespace Math
                 return angles;
             }
         }
-
-        public UnityEngine.Quaternion ToUnity() => new UnityEngine.Quaternion((float)this.a, (float)this.b, (float)this.c, (float)this.d);
 
         public static double Angle(Quaternion a, Quaternion b)
         {

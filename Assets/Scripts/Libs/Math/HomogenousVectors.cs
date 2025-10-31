@@ -1,8 +1,18 @@
 namespace Math
 {
+    /// <summary>
+    /// Custom homogenous <c>Vector2</c> struct.
+    /// </summary>
     public struct HomogenousVector2
     {
-        public double x, y, z;
+        /// <summary><b>X</b> component of the vector.</summary>
+        public double x;
+
+        /// <summary><b>Y</b> component of the vector.</summary>
+        public double y;
+
+        /// <summary><b>Z</b> component of the vector.</summary>
+        public double z;
 
         public HomogenousVector2(double x, double y, double z)
         {
@@ -24,9 +34,22 @@ namespace Math
         public static implicit operator HomogenousVector2(Vector2 v) => new HomogenousVector2(v.x, v.y, 1);
     }
 
+    /// <summary>
+    /// Custom homogenous <c>Vector3</c> struct. Allows for direct <see cref="Matrix4x4"/> transformations.
+    /// </summary>
     public struct HomogenousVector3
     {
-        public double x, y, z, w;
+        /// <summary><b>X</b> component of the vector.</summary>
+        public double x;
+
+        /// <summary><b>Y</b> component of the vector.</summary>
+        public double y;
+
+        /// <summary><b>Z</b> component of the vector.</summary>
+        public double z;
+
+        /// <summary><b>W</b> component of the vector.</summary>
+        public double w;
 
         public HomogenousVector3(double x, double y, double z, double w)
         {

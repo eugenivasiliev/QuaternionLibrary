@@ -1,5 +1,12 @@
 using Math;
 
+/// <summary>
+/// Joint implementing <b>translation</b> with <see cref="Matrix4x4"/>
+/// </summary>
+/// <remarks>Derives from <see cref="UnityEngine.MonoBehaviour"/> 
+/// to allow to add it as component script and use 
+/// <see cref="Start"/> and <see cref="Update"/>
+/// </remarks>
 public class LinearJoint : UnityEngine.MonoBehaviour, IJoint<Matrix4x4>
 {
     [UnityEngine.SerializeField] private string positiveMotionKeyId;

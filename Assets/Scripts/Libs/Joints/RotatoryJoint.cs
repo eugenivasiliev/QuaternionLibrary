@@ -1,6 +1,14 @@
 using Geometry;
 using Math;
+using System.Diagnostics;
 
+/// <summary>
+/// Joint implementing <b>rotation</b> with <see cref="Quaternion"/>
+/// </summary>
+/// <remarks>Derives from <see cref="UnityEngine.MonoBehaviour"/> 
+/// to allow to add it as component script and use 
+/// <see cref="Start"/> and <see cref="Update"/>
+/// </remarks>
 public class RotatoryJoint : UnityEngine.MonoBehaviour, IJoint<Quaternion>
 {
     [UnityEngine.SerializeField] private string positiveMotionKeyId;

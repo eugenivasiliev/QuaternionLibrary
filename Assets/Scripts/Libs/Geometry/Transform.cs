@@ -1,27 +1,37 @@
 using Math;
-using Unity.VisualScripting;
 
 namespace Geometry
 {
+    /// <summary>
+    /// Custom <c>Transform</c> class.
+    /// </summary>
+    /// <remarks>Derives from <see cref="UnityEngine.MonoBehaviour"/>,
+    /// to allow to add it as component script and synchronise with <see cref="UnityEngine.Transform"/> 
+    /// on <see cref="Start"/> and <see cref="Update"/>
+    /// </remarks>
     public class Transform : UnityEngine.MonoBehaviour
     {
         public Transform parent;
         public System.Collections.Generic.List<Transform> children;
 
-        public Vector3 position = Vector3.zero;
-        public Quaternion localRotation = Quaternion.identity;
-        public Quaternion rotation { 
-            get 
-            { 
-                if(parent != null) return parent.localRotation * localRotation;
-                return localRotation;
-            } 
-            set 
+        private Vector3 localPosition = Vector3.zero;
+        public Vector3 position
+        {
+            get => (parent != null) ? parent.position + localPosition : localPosition;
+            set
             {
-                foreach (Transform t in children)
-                    t.rotation = value * (localRotation.inverse * t.rotation);
-                localRotation = value;
-            } 
+                if (parent != null) localPosition = -parent.position + value;
+                else localPosition = value;
+            }
+        }
+        public Quaternion localRotation = Quaternion.identity;
+        public Quaternion rotation {
+            get => (parent != null) ? parent.rotation * localRotation : localRotation;
+            set
+            {
+                if (parent != null) localRotation = parent.rotation.inverse * value;
+                else localRotation = value;
+            }
         }
         public Vector3 eulerAngles
         {
@@ -65,6 +75,7 @@ namespace Geometry
         public static implicit operator Transform(UnityEngine.Transform transform) =>
             new Transform(transform.position, transform.rotation, transform.lossyScale);
 
+        /// <remarks>Synchronises with <see cref="UnityEngine.Transform"/></remarks>
         private void Start()
         {
             this.position = this.transform.position;
@@ -72,6 +83,7 @@ namespace Geometry
             this.scale = this.transform.lossyScale;
         }
 
+        /// <remarks>Synchronises with <see cref="UnityEngine.Transform"/></remarks>
         private void Update()
         {
             this.transform.position = this.position;
