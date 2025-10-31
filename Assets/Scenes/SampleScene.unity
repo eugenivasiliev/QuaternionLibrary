@@ -597,10 +597,15 @@ MonoBehaviour:
     x: 0
     y: 1
     z: 0
+  relativeDirection:
+    x: 0
+    y: 0
+    z: 0
   startPos:
     x: 0
     y: 0
     z: 0
+  Transform: {fileID: 821967973}
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -782,10 +787,14 @@ MonoBehaviour:
   maxRange: 180
   delta: 1
   direction:
-    x: 0
-    y: 1
+    x: 1
+    y: 0
     z: 0
-  myTransform: {fileID: 1598800553}
+  relativeDirection:
+    x: 0
+    y: 0
+    z: 0
+  Transform: {fileID: 1598800553}
 --- !u!114 &1598800553
 MonoBehaviour:
   m_ObjectHideFlags: 0
