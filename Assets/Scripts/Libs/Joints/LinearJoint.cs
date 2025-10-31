@@ -1,4 +1,5 @@
 using Math;
+using Geometry;
 
 /// <summary>
 /// Joint implementing <b>translation</b> with <see cref="Matrix4x4"/>
@@ -30,16 +31,17 @@ public class LinearJoint : UnityEngine.MonoBehaviour, IJoint<Matrix4x4>
     [UnityEngine.SerializeField] private Vector3 startPos;
 
     Matrix4x4 IJoint<Matrix4x4>.GetLocalTransformation() => Matrix4x4.CreateTranslation((this as IJoint<Matrix4x4>).t * direction);
+    [UnityEngine.SerializeField] public Transform Transform;
 
     private void Start()
     {
         (this as IJoint<Matrix4x4>).Setup();
         UnityEngine.InputSystem.InputSystem.actions.Enable();
-        startPos = this.GetComponent<Geometry.Transform>().position;
+        startPos = this.Transform.position;
     }
 
     public void Update()
     {
-        this.GetComponent<Geometry.Transform>().position = (this as IJoint<Matrix4x4>).GetLocalTransformation() * startPos;
+        this.Transform.position = (this as IJoint<Matrix4x4>).GetLocalTransformation() * startPos;
     }
 }
