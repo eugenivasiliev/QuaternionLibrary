@@ -16,10 +16,12 @@ public interface IJoint<T> where T : Transformation
     public double Delta { get; }
 
     public ClampedDouble t { get; set; }
+    public ClampedDouble prev { get; set; }
 
     public void Setup()
     {
         t = new ClampedDouble(0, MinRange, MaxRange);
+        prev = t;
     }
 
     public T GetLocalTransformation();
@@ -28,6 +30,4 @@ public interface IJoint<T> where T : Transformation
         t += Delta;
     public void NegativeMotionAction() =>
         t -= Delta;
-
-    public void JointUpdate();
 }

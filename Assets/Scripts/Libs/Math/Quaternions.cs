@@ -87,16 +87,30 @@ namespace Math
             );
 
         public static Quaternion operator *(double d, Quaternion q) => new Quaternion(d * q.a, d * q.b, d * q.c, d * q.d);
+
+        /// <remarks>
+        /// Using Euler-Rodrigues formula for quaternion rotation.
+        /// </remarks>
+        public static Vector3 operator *(Quaternion q, Vector3 v) =>
+            v + 2d * q.Real * q.Imaginary.Cross(v) 
+                + 2d * q.Imaginary.Cross(q.Imaginary.Cross(v));
         public static Quaternion operator /(Quaternion q, double d) => (1.0f / d) * q;
 
         public static implicit operator UnityEngine.Quaternion(Quaternion q) =>
-            new UnityEngine.Quaternion((float)q.d, (float)q.a, (float)q.b, (float)q.c);
+            new UnityEngine.Quaternion((float)q.b, (float)q.c, (float)q.d, (float)q.a);
 
         public static implicit operator Quaternion(UnityEngine.Quaternion q) =>
-            new Quaternion(q.x, q.y, q.z, q.w);
+            new Quaternion(q.w, q.x, q.y, q.z);
 
-        public double RealComponent() => this.a;
-        public Vector3 ImaginaryComponent() => new Vector3(this.b, this.c, this.d);
+        /// <summary>
+        /// Real component of the <c>Quaternion</c>.
+        /// </summary>
+        public double Real => this.a;
+
+        /// <summary>
+        /// Imaginary vector component of the <c>Quaternion</c>.
+        /// </summary>
+        public Vector3 Imaginary => new Vector3(this.b, this.c, this.d);
 
         public Quaternion conjugated { get { return new Quaternion(this.a, -this.b, -this.c, -this.d); } }
         public void Conjugate() { b = -b; c = -c; d = -d; }
