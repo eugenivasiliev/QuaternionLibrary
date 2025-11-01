@@ -11,7 +11,12 @@ public class MyRobotController : UnityEngine.MonoBehaviour
 
     private void Start()
     {
-        UnityEngine.InputSystem.InputSystem.actions.FindAction("Joint Change").performed += ctx => ChangeJoint();
+        UnityEngine.InputSystem.InputSystem.actions.FindAction("Joint Change").performed += ctx =>
+        {
+            activeJoint++;
+            activeJoint %= joints.Count;
+            ChangeJoint();
+        };
         ChangeJoint();
     }
 
@@ -26,9 +31,6 @@ public class MyRobotController : UnityEngine.MonoBehaviour
 
     private void ChangeJoint()
     {
-        activeJoint++;
-        activeJoint %= joints.Count;
-
         transJoint = null; rotJoint = null;
 
         if (joints[activeJoint].TryGetComponent(out transJoint)) return;
