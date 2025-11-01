@@ -111,7 +111,7 @@ namespace Math
         public static Quaternion operator /(Quaternion q, double d) => (1.0f / d) * q;
 
         public static implicit operator UnityEngine.Quaternion(Quaternion q) =>
-            new UnityEngine.Quaternion((float)q.d, (float)q.a, (float)q.b, (float)q.c);
+            new UnityEngine.Quaternion((float)q.b, (float)q.c, (float)q.d, (float)q.a);
 
         public static implicit operator Quaternion(UnityEngine.Quaternion q) =>
             new Quaternion(q.w, q.x, q.y, q.z);
