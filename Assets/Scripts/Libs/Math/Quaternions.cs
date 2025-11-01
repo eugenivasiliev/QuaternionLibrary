@@ -114,7 +114,7 @@ namespace Math
             new UnityEngine.Quaternion((float)q.d, (float)q.a, (float)q.b, (float)q.c);
 
         public static implicit operator Quaternion(UnityEngine.Quaternion q) =>
-            new Quaternion(q.x, q.y, q.z, q.w);
+            new Quaternion(q.w, q.x, q.y, q.z);
 
         public double RealComponent() => this.a;
         public Vector3 ImaginaryComponent() => new Vector3(this.b, this.c, this.d);
