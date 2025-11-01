@@ -22,7 +22,7 @@ namespace Geometry
             get 
             {
                 if (parent != null) {
-                    return parent.rotation * localPosition + parent.position;
+                    return (parent.rotation * localPosition) + parent.position;
                 }
                 else {
                     return localPosition;
@@ -32,9 +32,7 @@ namespace Geometry
             {
                 if (parent != null)
                 {
-                    Vector3 point = value;
-                    point = localRotation.inverse * point;
-                    localPosition = -parent.position + point;
+                    localPosition = parent.rotation.inverse * (value - parent.position);
                 }
                 else localPosition = value;
             }
@@ -91,7 +89,7 @@ namespace Geometry
             new Transform(transform.position, transform.rotation, transform.lossyScale);
 
         /// <remarks>Synchronises with <see cref="UnityEngine.Transform"/></remarks>
-        private void Start()
+        public void Setup()
         {
             this.position = this.transform.position;
             this.rotation = this.transform.rotation;
@@ -99,7 +97,7 @@ namespace Geometry
         }
 
         /// <remarks>Synchronises with <see cref="UnityEngine.Transform"/></remarks>
-        private void Update()
+        public void Refresh()
         {
             this.transform.position = this.position;
             this.transform.rotation = this.rotation;

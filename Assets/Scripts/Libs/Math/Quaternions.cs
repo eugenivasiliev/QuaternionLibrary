@@ -88,26 +88,12 @@ namespace Math
 
         public static Quaternion operator *(double d, Quaternion q) => new Quaternion(d * q.a, d * q.b, d * q.c, d * q.d);
 
-        public static Vector3 operator *(Quaternion q, Vector3 v)
-        {
-            double num = q.d * 2f;
-            double num2 = q.a * 2f;
-            double num3 = q.b * 2f;
-            double num4 = q.d * num;
-            double num5 = q.a * num2;
-            double num6 = q.b * num3;
-            double num7 = q.d * num2;
-            double num8 = q.d * num3;
-            double num9 = q.a * num3;
-            double num10 = q.c * num;
-            double num11 = q.c * num2;
-            double num12 = q.c * num3;
-            Vector3 result = default;
-            result.x = (1f - (num5 + num6)) * v.x + (num7 - num12) * v.y + (num8 + num11) * v.z;
-            result.y = (num7 + num12) * v.x + (1f - (num4 + num6)) * v.y + (num9 - num10) * v.z;
-            result.z = (num8 - num11) * v.x + (num9 + num10) * v.y + (1f - (num4 + num5)) * v.z;
-            return result;
-        }
+        /// <remarks>
+        /// Using Euler-Rodrigues formula for quaternion rotation.
+        /// </remarks>
+        public static Vector3 operator *(Quaternion q, Vector3 v) =>
+            v + 2d * q.Real * q.Imaginary.Cross(v) 
+                + 2d * q.Imaginary.Cross(q.Imaginary.Cross(v));
         public static Quaternion operator /(Quaternion q, double d) => (1.0f / d) * q;
 
         public static implicit operator UnityEngine.Quaternion(Quaternion q) =>
@@ -116,8 +102,15 @@ namespace Math
         public static implicit operator Quaternion(UnityEngine.Quaternion q) =>
             new Quaternion(q.w, q.x, q.y, q.z);
 
-        public double RealComponent() => this.a;
-        public Vector3 ImaginaryComponent() => new Vector3(this.b, this.c, this.d);
+        /// <summary>
+        /// Real component of the <c>Quaternion</c>.
+        /// </summary>
+        public double Real => this.a;
+
+        /// <summary>
+        /// Imaginary vector component of the <c>Quaternion</c>.
+        /// </summary>
+        public Vector3 Imaginary => new Vector3(this.b, this.c, this.d);
 
         public Quaternion conjugated { get { return new Quaternion(this.a, -this.b, -this.c, -this.d); } }
         public void Conjugate() { b = -b; c = -c; d = -d; }

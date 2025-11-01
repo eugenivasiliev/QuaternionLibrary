@@ -28,22 +28,27 @@ public class RotatoryJoint : UnityEngine.MonoBehaviour, IJoint<Quaternion>
     [UnityEngine.SerializeField] private double delta;
     double IJoint<Quaternion>.Delta => delta;
 
+    ClampedDouble IJoint<Quaternion>.prev { get; set; }
+
     [UnityEngine.SerializeField] private Vector3 direction = Vector3.up;
     [UnityEngine.SerializeField] private Quaternion startRotation;
 
-    Quaternion IJoint<Quaternion>.GetLocalTransformation() => new Quaternion(direction, (this as IJoint<Quaternion>).t, true);
+    Quaternion IJoint<Quaternion>.GetLocalTransformation() => new Quaternion(direction, ((double)castedJoint.t - (double)castedJoint.prev), true);
 
     [UnityEngine.SerializeField] public Transform Transform;
 
+    private IJoint<Quaternion> castedJoint;
+
     private void Start()
     {
-        (this as IJoint<Quaternion>).Setup();
+        castedJoint = this;
+        castedJoint.Setup();
         UnityEngine.InputSystem.InputSystem.actions.Enable();
-        startRotation = Transform.rotation;
     }
 
     public void Update()
     {
-        Transform.rotation = (this as IJoint<Quaternion>).GetLocalTransformation() * startRotation;
+        Transform.rotation = castedJoint.GetLocalTransformation() * Transform.rotation;
+        castedJoint.prev = castedJoint.t;
     }
 }
