@@ -18,10 +18,13 @@ public class Pickup : UnityEngine.MonoBehaviour
 
     private void Update()
     {
-        if(target != null)
+        if (target != null)
+        {
             target.position = this.Transform.position + (this.Transform.rotation * targetOffset);
+            target.rotation = this.Transform.rotation;
+        }
 
-        if (!UnityEngine.Input.GetKey(engageKeyId)) return;
+        if (!UnityEngine.Input.GetKeyDown(engageKeyId)) return;
         
         if(target != null)
         {

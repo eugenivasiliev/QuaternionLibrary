@@ -712,6 +712,7 @@ GameObject:
   - component: {fileID: 1855098373}
   - component: {fileID: 1855098372}
   - component: {fileID: 1855098376}
+  - component: {fileID: 1855098377}
   m_Layer: 0
   m_Name: Target
   m_TagString: pickup
@@ -846,6 +847,33 @@ MonoBehaviour:
     x: 0
     y: 0
     z: 0
+--- !u!54 &1855098377
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1855098371}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &2023532272
 GameObject:
   m_ObjectHideFlags: 0
@@ -928,6 +956,7 @@ GameObject:
   - component: {fileID: 4307220115465879146}
   - component: {fileID: 4307220115465879147}
   - component: {fileID: 4307220115465879148}
+  - component: {fileID: 4307220115465879149}
   m_Layer: 0
   m_Name: head1_low
   m_TagString: Untagged
@@ -2281,10 +2310,11 @@ MonoBehaviour:
   targetTag: pickup
   target: {fileID: 0}
   targetOffset:
-    x: 0
-    y: 0
-    z: 2
-  engageKeyId: space
+    x: 3.5
+    y: 3
+    z: 0
+  collisions: []
+  engageKeyId: q
 --- !u!135 &4307220115465879148
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -2306,6 +2336,33 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0.4967863, y: 0.703274, z: 0.031708963}
+--- !u!54 &4307220115465879149
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 129065742104148243}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!4 &4379877507242446951
 Transform:
   m_ObjectHideFlags: 0
