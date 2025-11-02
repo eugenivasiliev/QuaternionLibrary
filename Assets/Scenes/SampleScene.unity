@@ -565,6 +565,7 @@ MonoBehaviour:
   - {fileID: 5453704446751777143}
   - {fileID: 1595005529542900461}
   activeJoint: 0
+  particles: {fileID: 9176799203653847383, guid: 2bf8fb6bdf25fae408f55f9d7c28abc6, type: 3}
 --- !u!4 &1476498742
 Transform:
   m_ObjectHideFlags: 0
@@ -574,7 +575,7 @@ Transform:
   m_GameObject: {fileID: 1476498740}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.73291266, y: 2.5067475, z: -0.5}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
