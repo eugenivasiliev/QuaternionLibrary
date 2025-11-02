@@ -33,7 +33,7 @@ public class RotatoryJoint : UnityEngine.MonoBehaviour, IJoint<Quaternion>
     [UnityEngine.SerializeField] private Vector3 direction = Vector3.up;
     [UnityEngine.SerializeField] private Quaternion startRotation;
 
-    Quaternion IJoint<Quaternion>.GetLocalTransformation() => new Quaternion(direction, ((double)castedJoint.t - (double)castedJoint.prev), true);
+    Quaternion IJoint<Quaternion>.GetLocalTransformation() => new Quaternion(Transform.rotation * direction, ((double)castedJoint.t - (double)castedJoint.prev), true);
 
     [UnityEngine.SerializeField] public Transform Transform;
 
