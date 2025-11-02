@@ -67,6 +67,16 @@ namespace Geometry
         public Vector3 angularAcceleration = Vector3.zero;
 
         public Transform() { }
+
+        public Transform(Transform transform)
+        {
+            this.parent = transform.parent;
+            this.position = transform.position;
+            this.rotation = transform.rotation;
+            this.scale = transform.scale;
+            this.children = transform.children;
+        }
+
         public Transform(Vector3 position, Vector3 velocity)
         {
             this.position = position;
