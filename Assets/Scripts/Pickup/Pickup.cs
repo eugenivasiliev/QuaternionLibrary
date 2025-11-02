@@ -20,21 +20,31 @@ public class Pickup : UnityEngine.MonoBehaviour
     {
         if (target != null)
         {
+            //Update target if it exists
             target.position = this.Transform.position + (this.Transform.rotation * targetOffset);
             target.rotation = this.Transform.rotation;
+            target.Refresh();
         }
 
         if (!UnityEngine.Input.GetKeyDown(engageKeyId)) return;
         
         if(target != null)
         {
+            //If target already existed, remove
+            target.gameObject.GetComponent<UnityEngine.Rigidbody>().useGravity = true;
+            target.enabled = false;
             target = null;
             return;
         }
 
+        //Pick up new target
         foreach (Transform t in collisions)
             if (t.gameObject.tag == targetTag) {
-                target = t; return;
+                target = t;
+                target.gameObject.GetComponent<UnityEngine.Rigidbody>().useGravity = false;
+                target.enabled = true;
+                target.Setup();
+                return;
             }
     }
 
